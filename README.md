@@ -20,7 +20,6 @@
 1. Contract Addresses - 0x8c5E74b1331aABE747301D5872E6C18AA94d2AB2
 2. Contract Abi for 
      - SolnSquareVerifier contract = [SolnSquareVerifier Contract](./SolnSquareVerifier.json)
-     - Verifer contract = [Verifier Contract](./Verifier.json)
 3. Opensea Marketplace - https://testnets.opensea.io/collection/unidentified-contract-yxlhqfdevs
 
 
