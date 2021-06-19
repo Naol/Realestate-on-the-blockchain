@@ -20,7 +20,7 @@
 1. Contract Addresses ()
 2. Contract Abi for 
      - SolnSquareVerifier contract = [SolnSquareVerifier Contract](./SolnSquareVerifier.json)
-     - Verifer contract = [Verifier Contract](./verifier.json)
+     - Verifer contract = [Verifier Contract](./Verifier.json)
 
 
 
