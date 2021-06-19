@@ -19,8 +19,8 @@
 
 1. Contract Addresses ()
 2. Contract Abi for 
-     - SolnSquareVerifier contract = https://github.com/Naol/Realestate-on-the-blockchain/blob/main/SolnSquareVerifier.json
-     - Verifer contract = [I'm an inline-style link](https://www.somewebsite.com)
+     - SolnSquareVerifier contract = [SolnSquareVerifier Contract](./SolnSquareVerifier.json)
+     - Verifer contract = [Verifier Contract](./verifier.json)
 
 
 
