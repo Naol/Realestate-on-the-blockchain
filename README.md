@@ -1,6 +1,26 @@
-# Udacity Blockchain Capstone
+# Decentralized housing product. 
 
-The capstone will build upon the knowledge you have gained in the course in order to build a decentralized housing product. 
+
+# How to test code
+
+1. To test the ERC721 mintable contract please run - truffle test ./test/TestERC721Mintable.js
+ - This files tests and achieves if the contract return total supply
+ -  get token balance
+ -  return token uri
+ -  transfer token from one owner to another
+ -  fail when minting when address is not contract owner and 
+ -  return contract owner
+2. To test the Zokrates generated verifier contract please run - truffle test ./test/TestSquareVerifier.js
+ - This files tests and achieves if the verifier successfully verifys correct proof and rejects if incorrect proof is submitted
+3. Finally, to test the contract that combines the functionalities of the above two contracts, please run - truffle test ./test/TestSolnSquareVerifier.js
+
+
+# Deployed contract details
+
+1. Contract Addresses ()
+2. Contract Abi for SolnSquareVerifier contract = 
+
+
 
 # Project Resources
 
