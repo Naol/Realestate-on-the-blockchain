@@ -33,6 +33,7 @@ contract SolnSquareVerifier is ERC721MintableComplete {
     mapping(bytes32 => Solution) private uniqueSolutions;
 
     event SolutionAdded(uint256 index, address wallet);
+    event TokenMinted(uint256 index, address wallet);
 
     modifier solutionNotExists(uint256 index, address wallet) {
         bytes32 key = keccak256(abi.encodePacked(index, wallet));
@@ -51,7 +52,7 @@ contract SolnSquareVerifier is ERC721MintableComplete {
         emit SolutionAdded(index, wallet);
     }
 
-    // ok Create a function to mint new NFT only after the solution has been verified
+    // Create a function to mint new NFT only after the solution has been verified
     function mintNFT(
         uint256[2] calldata a,
         uint256[2][2] calldata b,
@@ -68,6 +69,8 @@ contract SolnSquareVerifier is ERC721MintableComplete {
         this.addSolution(index, wallet);
         //  - make sure you handle metadata as well as tokenSuplly
         super._mint(wallet, index);
+        emit TokenMinted(index, wallet);
+
     }
 }
 

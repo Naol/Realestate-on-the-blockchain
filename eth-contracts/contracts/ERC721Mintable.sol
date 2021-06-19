@@ -124,14 +124,14 @@ contract Pausable is Ownable{
         _paused = false;
     }
 
-    // function setter(bool set) public onlyOwner {
-    //     _paused = set;
-    //     if (set) {
-    //         emit Paused(msg.sender);
-    //     } else {
-    //         emit Unpaused(msg.sender);
-    //     }
-    // }
+    function setter(bool set) public onlyOwner {
+        _paused = set;
+        if (set) {
+            emit Paused(msg.sender);
+        } else {
+            emit Unpaused(msg.sender);
+        }
+    }
 
     /**
      * @dev Returns true if the contract is paused, and false otherwise.
@@ -370,7 +370,6 @@ contract ERC721 is Pausable, ERC165 {
         emit Transfer(from, to, tokenId);
     }
 
-    
     /**
      * @dev Internal function to invoke `onERC721Received` on a target address
      * The call is not executed if the target address is not a contract
@@ -595,50 +594,45 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
      *     bytes4(keccak256('tokenURI(uint256)'))
      */
 
+
     constructor (string memory name, string memory symbol, string memory baseTokenURI) public {
+        // TO/DO: set instance var values
         _name = name;
         _symbol = symbol;
         _baseTokenURI = baseTokenURI;
-
-        // register the supported interfaces to conform to ERC721 via ERC165
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
 
-    /**
-     * @dev Gets the token name.
-     * @return string representing the token name
-     */
-    function name() external view returns (string memory) {
+    // TO.DO: create external getter functions for name, symbol, and baseTokenURI
+
+     function getName() external view returns(string memory){
         return _name;
     }
 
-    /**
-     * @dev Gets the token symbol.
-     * @return string representing the token symbol
-     */
-    function symbol() external view returns (string memory) {
+    function getSymbol() external view returns(string memory){
         return _symbol;
     }
 
-    /**
-     * @dev Returns an URI for a given token ID.
-     * Throws if the token ID does not exist. May return an empty string.
-     * @param tokenId uint256 ID of the token to query
-     */
-    function tokenURI(uint256 tokenId) external view returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-        return _tokenURIs[tokenId];
+    function getBaseTokenUri() external view returns(string memory){
+        return _baseTokenURI;
     }
 
-    /**
-     * @dev Internal function to set the token URI for a given token.
-     * Reverts if the token ID does not exist.
-     * @param tokenId uint256 ID of the token to set its URI
-     * @param uri string URI to assign
-     */
-    function _setTokenURI(uint256 tokenId, string memory uri) internal {
-        require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
-        _tokenURIs[tokenId] = uri;
+    function getTokenURI(uint256 tokenId) external view returns (string memory) {
+        require(_exists(tokenId));
+        return _tokenToURIs[tokenId];
+    }
+
+
+    // TODO: Create an internal function to set the tokenURI of a specified tokenId
+    // It should be the _baseTokenURI + the tokenId in string form
+    // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
+    // TIP #2: you can also use uint2str() to convert a uint to a string
+        // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
+    // req/uire the token exists before setting
+
+    function setTokenURI(uint256 tokenId) internal {
+        require(_exists(tokenId),"Token Doesnt exist");
+        _tokenToURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
     }
 
 
@@ -659,9 +653,10 @@ contract ERC721MintableComplete is ERC721Metadata{
     constructor(string memory name, string memory symbol) public ERC721Metadata(name, symbol,
             "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {}
 
-    function mintWithTokenURI(address to, uint256 tokenId, string memory tokenURI) public returns (bool) {
-        _mint(to, tokenId);
-        _setTokenURI(tokenId, tokenURI);
+    function mint(address to, uint256 tokenId) public onlyOwner returns (bool){
+        super._mint(to, tokenId);
+        super.setTokenURI(tokenId);
+
         return true;
     }
 }
