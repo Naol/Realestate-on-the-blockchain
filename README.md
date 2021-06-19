@@ -17,7 +17,7 @@
 
 # Deployed contract details
 
-1. Contract Addresses ()
+1. Contract Addresses - 0xdA178a09f059a1c2e38050144639914e64abEc50
 2. Contract Abi for 
      - SolnSquareVerifier contract = [SolnSquareVerifier Contract](./SolnSquareVerifier.json)
      - Verifer contract = [Verifier Contract](./Verifier.json)
